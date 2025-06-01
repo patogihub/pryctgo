@@ -21,7 +21,7 @@ DeleteTask(c *gin.Context)
 
 func GetTasks(c *gin.Context) {
 	// TODO: devolver lista de tareas
-	// c.JSON(http.StatusOK, gin.H{"message": "Listar tareas"})
+
 	tasks := storage.Tasks
 	c.JSON(http.StatusOK, gin.H{"message:": tasks})
 
@@ -39,11 +39,10 @@ func CreateTask(c *gin.Context) {
 		return
 	}
 
-	// Asignamos un ID único
 	storage.LastID++
 	newTask.ID = storage.LastID
 	newTask.Completed = false // por defecto, nueva tarea no está completada
-	// Guardamos en la lista
+	// agregamos al final en la lista
 	storage.Tasks = append(storage.Tasks, newTask)
 
 	// Devolvemos la tarea creada
